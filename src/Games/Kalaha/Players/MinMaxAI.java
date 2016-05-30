@@ -2,6 +2,8 @@ package Games.Kalaha.Players;
 
 import Games.Kalaha.Boards.Board;
 import Games.Kalaha.Move;
+import Games.Kalaha.Players.AI.Minimax;
+import Games.Kalaha.Players.AI.Minimax2;
 
 import java.util.ArrayList;
 
@@ -10,6 +12,7 @@ import java.util.ArrayList;
  */
 
 public class MinMaxAI extends Player{
+    /*
     private Heuristic heuristic;
     public MinMaxAI(Heuristic heur){
         this.heuristic = heur;
@@ -83,4 +86,16 @@ public class MinMaxAI extends Player{
         //action.apply(copyGame);
         return board;
     }
+*/
+    public int i = 0;
+    @Override
+    public Move pickMove(String s) {
+        //In this game, one avatar = one player so we ignore the string
+        //We extend core player which knows the board
+        System.out.println("Nom IA : "+s+" joue son "+i+ "  ème coup");
+        i++;
+        Heuristic heuristic = new Minimax(s, players, 6, leftTokensGrantee, emptyCapture);
+        return new Move(heuristic.compute(board));
+    }
+
 }
