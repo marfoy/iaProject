@@ -54,10 +54,10 @@ public class Minimax implements Heuristic{
     }
 
     //Utility is supposed to be several heuristics, here we just maximise nbr of tokens in player's reserve
-    public int utility(Board board, String player) {
+    public double utility(Board board, String player) {
         // sums of tokens in reserves
-        HashMap sums = board.getSums(true,false);
-        return (int) sums.get(player);
+        HashMap<String, Integer> sums = board.getSums(true, false);
+        return -1.0 * ( sums.values().stream().reduce(0, (a, b) -> a + b) - sums.get(player) );
     }
 
 
