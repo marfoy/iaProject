@@ -39,7 +39,22 @@ public class TLMinimax {
     }
 
     public int bestMove(Board board) {
-        Game game = new Game(board.clone(),leftTokenGrantee,emptyCapture,competitors);
+        //List given by player is not in the right order. When we create a new Game, we need to put the circular list
+        //in the right order ie player is first in the list
+        ArrayList players = new ArrayList(competitors.size());
+
+        //We add every players to the end of the list until we get to the current player, we then add all remaining
+        //players to the beginning of the list
+        for(int i = 0; i<competitors.size();i++) {
+            if(competitors.get(i).equals(player)){
+                players.addAll(0,competitors.subList(i,competitors.size()));
+            }
+            else {
+                players.add(competitors.get(i));
+            }
+        }
+
+        Game game = new Game(board.clone(),leftTokenGrantee,emptyCapture,players);
         maxValue(game, player, 0);
         System.out.println("AI pit choice "+bestPitChoice);
         System.out.println(" ");

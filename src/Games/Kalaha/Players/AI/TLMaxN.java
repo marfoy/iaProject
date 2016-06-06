@@ -5,5 +5,5 @@ package Games.Kalaha.Players.AI;
  */
 public class TLMaxN {
 
-    
+
 }
