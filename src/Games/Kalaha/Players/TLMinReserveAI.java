@@ -8,7 +8,7 @@ import Games.Kalaha.Players.AI.TLMinimax;
  * Created by mrt on 19/04/16.
  */
 
-public class TLMaxReserveAI extends Player{
+public class TLMinReserveAI extends Player{
 
     public int i = 0;
     @Override
@@ -23,8 +23,8 @@ public class TLMaxReserveAI extends Player{
             public double compute(Board board) {
 		int maxReserve = 0;
 		for (int i = 0; i < board.getLength();++i){
-		    if(board.isKalaha(i) && board.getPlayer(i).equals(players)){
-			maxReserve = Math.max(maxReserve,board.getPieceAt(i));
+		    if(board.isKalaha(i) && !board.getPlayer(i).equals(players)){
+		       maxReserve = Math.max(maxReserve,board.getPieceAt(i));
 		    }
 		}
 		return  maxReserve;
