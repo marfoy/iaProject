@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * Created by Clement on 30-05-16.
  */
-public class Minimax implements Heuristic{
+public class Minimax {
 
     //The player for which we are picking the move
     private final String player;
@@ -26,18 +26,20 @@ public class Minimax implements Heuristic{
     private Game.LeftTokensGrantee leftTokenGrantee;
     //Is capturing 0 tokens a capture
     private boolean emptyCapture;
+    //Heuristic
+    private Heuristic heuristic;
 
-    public Minimax(String player, ArrayList<String> players, int maxDepth, Game.LeftTokensGrantee leftTokenGrantee,
+    public Minimax(String player, ArrayList<String> players, int maxDepth, Heuristic heuristic, Game.LeftTokensGrantee leftTokenGrantee,
                    boolean emptyCapture) {
         this.player = player;
         this.competitors = players;
         this.maxDepth = maxDepth;
         this.leftTokenGrantee = leftTokenGrantee;
         this.emptyCapture = emptyCapture;
+        this.heuristic = heuristic;
     }
 
-    @Override
-    public int compute(Board board) {
+    public int bestMove(Board board) {
         Game game = new Game(board.clone(),leftTokenGrantee,emptyCapture,competitors);
         maxValue(game, player, 0);
         System.out.println("AI pit choice "+bestPitChoice);
@@ -53,17 +55,10 @@ public class Minimax implements Heuristic{
         return sums.containsValue(0);
     }
 
-    //Utility is supposed to be several heuristics, here we just maximise nbr of tokens in player's reserve
-    public double utility(Board board, String player) {
-        // sums of tokens in reserves
-        HashMap<String, Integer> sums = board.getSums(true, false);
-        return -1.0 * ( sums.values().stream().reduce(0, (a, b) -> a + b) - sums.get(player) );
-    }
-
 
     public double maxValue(Game game, String currentPlayer, int depth ) {
         if(terminalTest(game.getBoard()) || depth == maxDepth) {
-            return utility(game.getBoard(),this.player);
+            return heuristic.compute(game.getBoard());
         }
 
         double v = Double.NEGATIVE_INFINITY;
@@ -97,7 +92,7 @@ public class Minimax implements Heuristic{
 
     public double minValue(Game game, String currentPlayer, int depth ) {
         if(terminalTest(game.getBoard()) || depth == maxDepth ) {
-            return utility(game.getBoard(),this.player);
+            return heuristic.compute(game.getBoard());
         }
 
         double v = Double.POSITIVE_INFINITY;
