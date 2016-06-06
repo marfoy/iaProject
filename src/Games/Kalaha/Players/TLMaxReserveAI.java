@@ -20,10 +20,10 @@ public class TLMaxReserveAI extends Player{
         class Minimizer implements Heuristic {
 
             @Override
-            public double compute(Board board) {
+            public double compute(Board board, String player) {
 		int maxReserve = 0;
 		for (int i = 0; i < board.getLength();++i){
-		    if(board.isKalaha(i) && board.getPlayer(i).equals(s)){
+		    if(board.isKalaha(i) && board.getPlayer(i).equals(player)){
 			maxReserve = Math.max(maxReserve,board.getPieceAt(i));
 		    }
 		}
