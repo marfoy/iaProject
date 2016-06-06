@@ -2,17 +2,13 @@ package Games.Kalaha.Players;
 
 import Games.Kalaha.Boards.Board;
 import Games.Kalaha.Move;
-import Games.Kalaha.Players.AI.Minimax;
-import Games.Kalaha.Players.AI.Minimax2;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import Games.Kalaha.Players.AI.TLMinimax;
 
 /**
  * Created by mrt on 19/04/16.
  */
 
-public class MinMaxAI extends Player{
+public class TLMaxReserveAI extends Player{
 
     public int i = 0;
     @Override
@@ -30,7 +26,7 @@ public class MinMaxAI extends Player{
             }
         }
         Heuristic minimizer = new Minimizer();
-        Minimax minmax = new Minimax(s, players, 10 ,minimizer,leftTokensGrantee, emptyCapture);
+        TLMinimax minmax = new TLMinimax(s, players, 10 ,minimizer,leftTokensGrantee, emptyCapture);
         return new Move(minmax.bestMove(board));
     }
 

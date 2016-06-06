@@ -3,7 +3,6 @@ package Games.Kalaha.Players.AI;
 import Games.Kalaha.Boards.Board;
 import Games.Kalaha.Game;
 import Games.Kalaha.Move;
-import Games.Kalaha.Players.AI.util.State;
 import Games.Kalaha.Players.Heuristic;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.HashMap;
 /**
  * Created by Clement on 30-05-16.
  */
-public class Minimax {
+public class TLMinimax {
 
     //The player for which we are picking the move
     private final String player;
@@ -29,8 +28,8 @@ public class Minimax {
     //Heuristic
     private Heuristic heuristic;
 
-    public Minimax(String player, ArrayList<String> players, int maxDepth, Heuristic heuristic, Game.LeftTokensGrantee leftTokenGrantee,
-                   boolean emptyCapture) {
+    public TLMinimax(String player, ArrayList<String> players, int maxDepth, Heuristic heuristic, Game.LeftTokensGrantee leftTokenGrantee,
+                     boolean emptyCapture) {
         this.player = player;
         this.competitors = players;
         this.maxDepth = maxDepth;
