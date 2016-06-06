@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * Created by Clement on 31-05-16.
  */
-public class WinSequenceDetector extends RandomAI {
+public class WinSequenceDetectorAI extends RandomAI {
 
     /**
      * Returns true if all values in the arrayList are 0s (ie the game is finished)
