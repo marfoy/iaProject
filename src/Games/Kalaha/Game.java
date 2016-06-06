@@ -129,7 +129,7 @@ public class Game implements RoundRobin<Integer, Integer, Board, String> {
 		int m = scores.values().stream().reduce(0, Math::max);
 		ArrayList<String> winners = new ArrayList<>();
 		avatars.stream().filter(avatar -> scores.get(avatar) == m).forEach(avatar -> winners.add(avatar));
-		
+		System.out.println(winners);
 		return Collections.unmodifiableList(winners);
 	}
 }
