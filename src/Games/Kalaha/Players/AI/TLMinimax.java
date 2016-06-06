@@ -31,30 +31,38 @@ public class TLMinimax {
     public TLMinimax(String player, ArrayList<String> players, int maxDepth, Heuristic heuristic, Game.LeftTokensGrantee leftTokenGrantee,
                      boolean emptyCapture) {
         this.player = player;
-        this.competitors = players;
         this.maxDepth = maxDepth;
         this.leftTokenGrantee = leftTokenGrantee;
         this.emptyCapture = emptyCapture;
         this.heuristic = heuristic;
-    }
 
-    public int bestMove(Board board) {
         //List given by player is not in the right order. When we create a new Game, we need to put the circular list
         //in the right order ie player is first in the list
-        ArrayList players = new ArrayList(competitors.size());
+        ArrayList orderedCompetitors = new ArrayList(players.size());
 
         //We add every players to the end of the list until we get to the current player, we then add all remaining
         //players to the beginning of the list
-        for(int i = 0; i<competitors.size();i++) {
-            if(competitors.get(i).equals(player)){
-                players.addAll(0,competitors.subList(i,competitors.size()));
+        for(int i = 0; i<players.size();i++) {
+            if(players.get(i).equals(player)){
+                orderedCompetitors.addAll(0,players.subList(i,players.size()));
             }
             else {
-                players.add(competitors.get(i));
+                orderedCompetitors.add(players.get(i));
             }
         }
+        this.competitors = orderedCompetitors;
+        for(int i = 0; i<players.size();i++) {
+            System.out.println(players.get(i));
+        }
+        System.out.println("--------");
+        for(int i = 0; i<players.size();i++) {
+            System.out.println(competitors.get(i));
+        }
+    }
 
-        Game game = new Game(board.clone(),leftTokenGrantee,emptyCapture,players);
+    public int bestMove(Board board) {
+
+        Game game = new Game(board.clone(),leftTokenGrantee,emptyCapture,competitors);
         maxValue(game, player, 0);
         System.out.println("AI pit choice "+bestPitChoice);
         System.out.println(" ");
@@ -72,7 +80,7 @@ public class TLMinimax {
 
     public double maxValue(Game game, String currentPlayer, int depth ) {
         if(terminalTest(game.getBoard()) || depth == maxDepth) {
-            return heuristic.compute(game.getBoard());
+            return heuristic.compute(game.getBoard(), player);
         }
 
         double v = Double.NEGATIVE_INFINITY;
@@ -106,7 +114,7 @@ public class TLMinimax {
 
     public double minValue(Game game, String currentPlayer, int depth ) {
         if(terminalTest(game.getBoard()) || depth == maxDepth ) {
-            return heuristic.compute(game.getBoard());
+            return heuristic.compute(game.getBoard(), player);
         }
 
         double v = Double.POSITIVE_INFINITY;
