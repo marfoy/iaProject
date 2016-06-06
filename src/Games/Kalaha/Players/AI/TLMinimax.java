@@ -14,19 +14,19 @@ import java.util.HashMap;
 public class TLMinimax {
 
     //The player for which we are picking the move
-    private final String player;
+    protected final String player;
     //The list containing all the players
-    private final ArrayList<String> competitors;
+    protected final ArrayList<String> competitors;
     //Maximum depth for tree exploration
-    private final int maxDepth;
+    protected final int maxDepth;
     //The best move to play
-    private int bestPitChoice;
+    protected int bestPitChoice;
     //Grant tokens according to game rule
-    private Game.LeftTokensGrantee leftTokenGrantee;
+    protected Game.LeftTokensGrantee leftTokenGrantee;
     //Is capturing 0 tokens a capture
-    private boolean emptyCapture;
+    protected boolean emptyCapture;
     //Heuristic
-    private Heuristic heuristic;
+    protected Heuristic heuristic;
 
     public TLMinimax(String player, ArrayList<String> players, int maxDepth, Heuristic heuristic, Game.LeftTokensGrantee leftTokenGrantee,
                      boolean emptyCapture) {
