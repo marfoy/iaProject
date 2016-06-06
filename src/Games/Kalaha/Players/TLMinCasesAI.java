@@ -2,6 +2,7 @@ package Games.Kalaha.Players;
 
 import Games.Kalaha.Boards.Board;
 import Games.Kalaha.Move;
+import Games.Kalaha.Players.AI.TLMaxN;
 import Games.Kalaha.Players.AI.TLMinimax;
 
 /**
@@ -31,8 +32,14 @@ public class TLMinCasesAI extends Player{
             }
         }
         Heuristic minimizer = new Minimizer();
-        TLMinimax minmax = new TLMinimax(s, players, 10 ,minimizer,leftTokensGrantee, emptyCapture);
-        return new Move(minmax.bestMove(board));
+        if(players.size() > 2) {
+            TLMaxN maxN = new TLMaxN(s, players, 6 ,minimizer,leftTokensGrantee, emptyCapture);
+            return new Move(maxN.bestMove(board));
+        }
+        else {
+            TLMinimax minmax = new TLMinimax(s, players, 10 ,minimizer,leftTokensGrantee, emptyCapture);
+            return new Move(minmax.bestMove(board));
+        }
     }
 
 }
