@@ -23,7 +23,7 @@ public class TLMaxCasesAI extends Player{
             public double compute(Board board) {
 		int maxReserve = 0;
 		for (int i = 0; i < board.getLength();++i){
-		    if(!board.isKalaha(i) && board.getPlayer(i).equals(players)){
+		    if(!board.isKalaha(i) && board.getPlayer(i).equals(s)){
 			maxReserve = Math.max(maxReserve,board.getPieceAt(i));
 		    }
 		}
