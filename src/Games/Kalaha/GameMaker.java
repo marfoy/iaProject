@@ -98,6 +98,8 @@ public class GameMaker implements FX.GameMaker<Integer, Integer, Board, String, 
 		l.add(new SimplePlayerMaker<Integer, Integer, Board, String, Game, Move, Player>("AI2", TLMinReserveAI.class));
 		l.add(new SimplePlayerMaker<Integer, Integer, Board, String, Game, Move, Player>("AI3", TLMaxCasesAI.class));
 		l.add(new SimplePlayerMaker<Integer, Integer, Board, String, Game, Move, Player>("AI4", TLMinCasesAI.class));
+		l.add(new SimplePlayerMaker<Integer, Integer, Board, String, Game, Move, Player>("AIAB1", TLMaxReserveABAI.class));
+		l.add(new SimplePlayerMaker<Integer, Integer, Board, String, Game, Move, Player>("OnePunchAI", TLOnePunchAI.class));
 		return l;
 	}
 
