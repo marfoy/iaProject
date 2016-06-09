@@ -16,7 +16,6 @@ public class TLMinSumSquare extends Player{
     public Move pickMove(String s) {
         //In this game, one avatar = one player so we ignore the string
         //We extend core player which knows the board
-        System.out.println("Nom IA : "+s+" joue son "+i+ "  ème coup");
         i++;
         class Minimizer implements Heuristic {
 
@@ -26,7 +25,7 @@ public class TLMinSumSquare extends Player{
 		for (int i = 0; i < board.getLength();++i){
 			for (int j = 0; j < board.getLength();++j){
 			    if(!board.isKalaha(i) && !board.isKalaha(j) && board.getPlayer(j).equals(player) && board.getPlayer(i).equals(player) && j!=i){
-				sumSquare += ((board.getPieceAt(j) + board.getPieceAt(i)) * (board.getPieceAt(j) + board.getPieceAt(i)));
+				sumSquare += ((board.getPieceAt(j) - board.getPieceAt(i)) * (board.getPieceAt(j) - board.getPieceAt(i)));
 			}
 		    }
 		}
