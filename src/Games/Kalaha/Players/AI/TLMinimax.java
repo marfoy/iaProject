@@ -7,6 +7,7 @@ import Games.Kalaha.Players.Heuristic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * This is the minmax algorithm implementation
@@ -16,7 +17,7 @@ public class TLMinimax {
     //The player for which we are picking the move
     protected final String player;
     //The list containing all the players
-    protected final ArrayList<String> competitors;
+    protected ArrayList<String> competitors;
     //Maximum depth for tree exploration
     protected final int maxDepth;
     //The best move to play
@@ -38,19 +39,12 @@ public class TLMinimax {
 
         //List given by player is not in the right order. When we create a new Game, we need to put the circular list
         //in the right order ie player is first in the list
-        ArrayList orderedCompetitors = new ArrayList(players.size());
 
-        //We add every players to the end of the list until we get to the current player, we then add all remaining
-        //players to the beginning of the list
-        for(int i = 0; i<players.size();i++) {
-            if(players.get(i).equals(player)){
-                orderedCompetitors.addAll(0,players.subList(i,players.size()));
-            }
-            else {
-                orderedCompetitors.add(players.get(i));
-            }
+        this.competitors = players;
+        while(!competitors.get(0).equals(player)) {
+            competitors.add(competitors.remove(0));
         }
-        this.competitors = orderedCompetitors;
+
     }
 
     /**

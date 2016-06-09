@@ -39,16 +39,22 @@ public class TLMaxN extends TLMinimax {
     public ArrayList<Double> maxValueMaxN(Game game, String currentPlayer, int depth ) {
 
         if(terminalTest(game.getBoard()) || depth == maxDepth) {
-            ArrayList<Double> valueVector = new ArrayList<>(competitors.size());
+            ArrayList<Double> valueVector = new ArrayList(competitors.size());
             for(String p : competitors) {
                 valueVector.add(heuristic.compute(game.getBoard(),p));
             }
             return valueVector;
         }
 
-        ArrayList<Double> v = new ArrayList(competitors.size());
-        ArrayList<Double> tempV = new ArrayList(competitors.size());
         ArrayList<Integer> moves = possibleMoves(game.getBoard(),currentPlayer);
+        ArrayList<Double> ve = new ArrayList<>(competitors.size());
+        ArrayList<Double> tempV = new ArrayList<>(competitors.size());
+
+        for(int i = 0; i<competitors.size(); i++) {
+            ve.add(Double.NEGATIVE_INFINITY);
+            tempV.add(Double.NEGATIVE_INFINITY);
+        }
+
         int indexOfCurrent =  competitors.indexOf(currentPlayer);
 
         for(int m : moves ) {
@@ -63,8 +69,8 @@ public class TLMaxN extends TLMinimax {
                 tempV = maxValueMaxN(game, nextPlayer, (depth+1));
             }
 
-            if(tempV.get(indexOfCurrent) > v.get(indexOfCurrent)) {
-                v = tempV;
+            if(tempV.get(indexOfCurrent) > ve.get(indexOfCurrent)) {
+                ve = tempV;
                 if(depth == 0) {
                     this.bestPitChoice = m;
                 }
@@ -73,7 +79,7 @@ public class TLMaxN extends TLMinimax {
             nextMove.cancel(game);
         }
 
-        return v;
+        return ve;
     }
 
 }
