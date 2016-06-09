@@ -22,13 +22,13 @@ public class TLMinReserveAI extends Player{
 
             @Override
             public double compute(Board board, String player) {
-		int maxReserve = 0;
+		int minKalaha = 0;
 		for (int i = 0; i < board.getLength();++i){
 		    if(board.isKalaha(i) && !board.getPlayer(i).equals(player)){
-		       maxReserve = Math.max(maxReserve,board.getPieceAt(i));
+		       minKalaha = board.getPieceAt(i);
 		    }
 		}
-		return  maxReserve;
+		return  minKalaha;
             }
         }
         Heuristic minimizer = new Minimizer();
