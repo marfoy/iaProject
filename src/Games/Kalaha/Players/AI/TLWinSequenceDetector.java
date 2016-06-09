@@ -1,9 +1,10 @@
 package Games.Kalaha.Players.AI;
-
 import java.util.ArrayList;
 
 /**
- * Created by Clement on 06-06-16.
+ * Created by Clement
+ * This AI returns the move that needs to be played in order to continue an uninterrupted winning sequence of actions
+ * Move can be -infinity if no such move exists
  */
 public class TLWinSequenceDetector {
 
@@ -52,7 +53,6 @@ public class TLWinSequenceDetector {
                 //After playing the move we test if we won. If we did, we return the index of the pit we played for the
                 //winning move
                 if(won(pitsValues)) {
-                    System.out.println(index);
                     return index;
                 }
 
@@ -63,7 +63,6 @@ public class TLWinSequenceDetector {
                 //If -infinity is returned, it means we can't win down the line. Else we can somehow win further down.
                 //The current move is a good move that will allow us to win later so we return it
                 if(Double.isFinite(isWon)) {
-                    System.out.println(index);
                     return index;
                 }
 
@@ -76,7 +75,7 @@ public class TLWinSequenceDetector {
                 pitsValues.set(index,previousPitValue);
             }
         }
-        //If we get here, no winning move (at this depth or further down) has been found. The move played before didnt
+        //If we get here, no winning move (at this depth or further down) has been found. The move played before didn't
         //Allow us to win
         return Double.NEGATIVE_INFINITY;
     }

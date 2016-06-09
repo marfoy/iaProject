@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by Clement on 30-05-16.
+ * This is the minmax algorithm implementation
  */
 public class TLMinimax {
 
@@ -51,25 +51,28 @@ public class TLMinimax {
             }
         }
         this.competitors = orderedCompetitors;
-        for(int i = 0; i<players.size();i++) {
-            System.out.println(players.get(i));
-        }
-        System.out.println("--------");
-        for(int i = 0; i<players.size();i++) {
-            System.out.println(competitors.get(i));
-        }
     }
 
+    /**
+     * Returns the int value of the best move according to the minmax algorithm
+     * @param board The board we are playing on
+     * @return int value of best move according to minmax
+     */
     public int bestMove(Board board) {
 
+        //Copy of the game
         Game game = new Game(board.clone(),leftTokenGrantee,emptyCapture,competitors);
+        //Call on maxValue to start minmax
         maxValue(game, player, 0);
-        System.out.println("AI pit choice "+bestPitChoice);
-        System.out.println(" ");
+
         return bestPitChoice;
     }
 
-    //Returns true if game is finished ie all pits are empty for one player
+    /**
+     * Yields true if game is finished ie all pits are empty for one player
+     * @param board
+     * @return
+     */
     public boolean terminalTest(Board board) {
         //Hash map String-Int containing number of tokens for each player
         HashMap sums =  board.getSums(false, true);
@@ -78,7 +81,15 @@ public class TLMinimax {
     }
 
 
+    /**
+     * Max node for minmax
+     * @param game
+     * @param currentPlayer String giving current player, used to determine if a player plays twice
+     * @param depth
+     * @return
+     */
     public double maxValue(Game game, String currentPlayer, int depth ) {
+
         if(terminalTest(game.getBoard()) || depth == maxDepth) {
             return heuristic.compute(game.getBoard(), player);
         }
@@ -112,6 +123,13 @@ public class TLMinimax {
     }
 
 
+    /**
+     * Min node for minmax algorithm
+     * @param game
+     * @param currentPlayer
+     * @param depth
+     * @return
+     */
     public double minValue(Game game, String currentPlayer, int depth ) {
         if(terminalTest(game.getBoard()) || depth == maxDepth ) {
             return heuristic.compute(game.getBoard(), player);
@@ -136,6 +154,7 @@ public class TLMinimax {
         }
         return v;
     }
+
     /**
      * Returns all possible moves for a given player and a given board in an arrayList of integers
      * @param board
