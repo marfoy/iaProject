@@ -9,7 +9,7 @@ import Games.Kalaha.Players.AI.TLMinimax;
  * Created by mrt on 19/04/16.
  */
 
-public class TLMinCasesAI extends Player{
+public class TLMinSumSquare extends Player{
 
     public int i = 0;
     @Override
@@ -26,7 +26,7 @@ public class TLMinCasesAI extends Player{
 		for (int i = 0; i < board.getLength();++i){
 			for (int j = 0; j < board.getLength();++j){
 			    if(!board.isKalaha(i) && !board.isKalaha(j) && board.getPlayer(j).equals(player) && board.getPlayer(i).equals(player) && j!=i){
-				sumSquare = sumSquare + Math.pow(board.getPieceAt(j) + board.getPieceAt(i),2);
+				sumSquare += ((board.getPieceAt(j) + board.getPieceAt(i)) * (board.getPieceAt(j) + board.getPieceAt(i)));
 			}
 		    }
 		}
