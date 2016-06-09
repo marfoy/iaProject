@@ -6,7 +6,8 @@ import Games.Kalaha.Players.AI.TLWinSequenceDetector;
 import java.util.*;
 
 /**
- * Created by Clement on 31-05-16.
+ * This AI plays a whole sequence of moves leading to a win without giving the hand to another player.
+ * If such a sequence doesn't exist, it plays randomly.
  */
 public class TLWinSequenceAI extends RandomAI {
 
@@ -24,7 +25,7 @@ public class TLWinSequenceAI extends RandomAI {
         }
 
         //Removing the kalaha from the arraylist (this makes things easier)
-        int kalahaIndex = Collections.max(pits);
+        int kalahaIndex = pits.indexOf(Collections.max(pits));
         //kalah is always after the pits so it is the max index in the arraylist of indexes
         pitsValues.remove(kalahaIndex);
 
