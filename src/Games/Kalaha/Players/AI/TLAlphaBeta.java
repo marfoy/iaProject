@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by Clement on 30-05-16.
+ * This is the alpha beta algorithm for two players
  */
 public class TLAlphaBeta {
 
     //The player for which we are picking the move
     protected final String player;
     //The list containing all the players
-    protected final ArrayList<String> competitors;
+    protected ArrayList<String> competitors;
     //Maximum depth for tree exploration
     protected final int maxDepth;
     //The best move to play
@@ -36,40 +36,24 @@ public class TLAlphaBeta {
         this.emptyCapture = emptyCapture;
         this.heuristic = heuristic;
 
-        //List given by player is not in the right order. When we create a new Game, we need to put the circular list
-        //in the right order ie player is first in the list
-        ArrayList orderedCompetitors = new ArrayList(players.size());
+        this.competitors = players;
+        while(!competitors.get(0).equals(player)) {
+            competitors.add(competitors.remove(0));
+        }
 
-        //We add every players to the end of the list until we get to the current player, we then add all remaining
-        //players to the beginning of the list
-        for(int i = 0; i<players.size();i++) {
-            if(players.get(i).equals(player)){
-                orderedCompetitors.addAll(0,players.subList(i,players.size()));
-            }
-            else {
-                orderedCompetitors.add(players.get(i));
-            }
-        }
-        this.competitors = orderedCompetitors;
-        for(int i = 0; i<players.size();i++) {
-            System.out.println(players.get(i));
-        }
-        System.out.println("--------");
-        for(int i = 0; i<players.size();i++) {
-            System.out.println(competitors.get(i));
-        }
     }
 
     public int bestMove(Board board) {
-
         Game game = new Game(board.clone(),leftTokenGrantee,emptyCapture,competitors);
         maxValue(game, player, 0,Double.NEGATIVE_INFINITY,Double.POSITIVE_INFINITY);
-        System.out.println("AI pit choice "+bestPitChoice);
-        System.out.println(" ");
         return bestPitChoice;
     }
 
-    //Returns true if game is finished ie all pits are empty for one player
+    /**
+     * Yields true if the game is finished, ie one of the players has 0 tokens
+     * @param board
+     * @return
+     */
     public boolean terminalTest(Board board) {
         //Hash map String-Int containing number of tokens for each player
         HashMap sums =  board.getSums(false, true);
