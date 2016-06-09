@@ -30,7 +30,7 @@ public class TLMinSumSquare extends Player{
 			}
 		    }
 		}
-		return  sumSquare;
+		return  -1*sumSquare;
             }
         }
         Heuristic minimizer = new Minimizer();
