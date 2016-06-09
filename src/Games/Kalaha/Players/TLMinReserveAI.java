@@ -6,29 +6,32 @@ import Games.Kalaha.Players.AI.TLMaxN;
 import Games.Kalaha.Players.AI.TLMinimax;
 
 /**
- * This AI minimises the number of tokens in the adversaries reserves
+ * Created by mrt on 19/04/16.
  */
 
 public class TLMinReserveAI extends Player{
 
+    public int i = 0;
     @Override
     public Move pickMove(String s) {
-
-        class AdversariesResMin implements Heuristic {
+        //In this game, one avatar = one player so we ignore the string
+        //We extend core player which knows the board
+        System.out.println("Nom IA : "+s+" joue son "+i+ "  ème coup");
+        i++;
+        class Minimizer implements Heuristic {
 
             @Override
             public double compute(Board board, String player) {
-		        int nbrTokens = 0;
-		        for (int i = 0; i < board.getLength();++i){
-		            if(board.isKalaha(i) && !board.getPlayer(i).equals(player)){
-		                nbrTokens += board.getPieceAt(i);
-		            }
-		        }
-		        return  -1*nbrTokens;
+		int minKalaha = 0;
+		for (int i = 0; i < board.getLength();++i){
+		    if(board.isKalaha(i) && !board.getPlayer(i).equals(player)){
+		       minKalaha = board.getPieceAt(i);
+		    }
+		}
+		return  minKalaha;
             }
         }
-
-        Heuristic minimizer = new AdversariesResMin();
+        Heuristic minimizer = new Minimizer();
 
         if(players.size() > 2) {
             TLMaxN maxN = new TLMaxN(s, players, 6 ,minimizer,leftTokensGrantee, emptyCapture);

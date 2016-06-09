@@ -22,13 +22,15 @@ public class TLMinCasesAI extends Player{
 
             @Override
             public double compute(Board board, String player) {
-		int maxReserve = 0;
+		int sumSquare = 0;
 		for (int i = 0; i < board.getLength();++i){
-		    if(!board.isKalaha(i) && !board.getPlayer(i).equals(player)){
-			maxReserve = Math.max(maxReserve,board.getPieceAt(i));
+			for (int j = 0; j < board.getLength();++j){
+			    if(!board.isKalaha(i) && !board.isKalaha(j) && board.getPlayer(j).equals(player) && board.getPlayer(i).equals(player) && j!=i){
+				sumSquare = sumSquare + Math.pow(board.getPieceAt(j) + board.getPieceAt(i),2);
+			}
 		    }
 		}
-		return  maxReserve;
+		return  sumSquare;
             }
         }
         Heuristic minimizer = new Minimizer();
