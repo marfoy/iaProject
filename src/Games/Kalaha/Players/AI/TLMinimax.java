@@ -38,7 +38,8 @@ public class TLMinimax {
         this.heuristic = heuristic;
 
         //List given by player is not in the right order. When we create a new Game, we need to put the circular list
-        //in the right order ie player is first in the list
+        //in the right order ie player is first in the list. We remove first element and add it to the end of the list
+        //until the first element is the current player
 
         this.competitors = players;
         while(!competitors.get(0).equals(player)) {
