@@ -1,0 +1,5 @@
+Heuristique 1 qui maximise sa proprre reserve contre Joueur Random 12 victoires sur 20
+Heuristique 2 qui minimise la reserve adverse contre Joueur Random 12 victoires sur 20
+Heuristique 3 qui maximise les points dans ses propre pits  contre Joueur Random 11 victoires sur 20
+Heuristique 4 qui minimise les points dans les pits  adverse contre Joueur Random 4 victoires sur 20
+IA basée sur le match de séquences de victoire sinon qui joue l'heuristique 1  17 victoires sur 20
