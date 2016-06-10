@@ -54,11 +54,11 @@ public class TLOnePunchAI extends Player {
                 public double compute(Board board, String player) {
                     int nbrTokens = 0;
                     for (int i = 0; i < board.getLength();i++){
-                        if(!board.isKalaha(i) && board.getPlayer(i).equals(player)){
+                        if(board.isKalaha(i) && !board.getPlayer(i).equals(player)){
                             nbrTokens += board.getPieceAt(i);
                         }
                     }
-                    return  nbrTokens;
+                    return  (-1*nbrTokens);
                 }
             }
 
