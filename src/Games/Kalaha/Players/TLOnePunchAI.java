@@ -4,9 +4,7 @@ import Games.Kalaha.Boards.Board;
 import Games.Kalaha.Move;
 import Games.Kalaha.Players.AI.TLAlphaBeta;
 import Games.Kalaha.Players.AI.TLMaxN;
-import Games.Kalaha.Players.AI.TLMinimax;
 import Games.Kalaha.Players.AI.TLWinSequenceDetector;
-
 import java.util.ArrayList;
 import java.util.Collections;
 

@@ -1,10 +1,10 @@
-Heuristique 1 qui maximise sa proprre reserve AI1
-Heuristique 2 qui minimise la reserve adverse AI2
-Heuristique 3 qui maximise les points dans ses propre pits AI3 
-Heuristique 4 qui minimise la somme de carré de différence de points entre deux pits d'un meme joueur AI4 
-IA basée sur le match de séquences de victoire sinon qui joue l'heuristique 2  17 victoires sur 20
+Heuristique 1 qui maximise sa propre réserve AI1
+Heuristique 2 qui minimise la réserve adverse AI2
+Heuristique 3 qui maximise les points dans ses propres pits AI3
+Heuristique 4 qui minimise la somme des carrés des différences des tokens entre deux pits d'un meme joueur AI4
+IA basée sur la détection de séquence gagnante si une telle séquence existe, qui joue l'heuristique 2 sinon
 
-Les chiffres a gauche du joueur A represente le nombre de partie gagnée par le joueur A
+Les chiffres à gauche du joueur A représentent le nombre de parties gagnées par le joueur A
 
 --------------------
 RANDOM VS AI1
